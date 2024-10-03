@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV['MAKERBLE_ASMT_DATABASE_USER'] || 'postgres' %>
+  password: <%= ENV['MAKERBLE_ASMT_DATABASE_PASSWORD'] %>
+  host: localhost
+  port: 5432
+
+development:
+  <<: *default
+  database: makerble_asmt_development
+
+test:
+  <<: *default
+  database: makerble_asmt_test
+
+production:
+  <<: *default
+  database: makerble_asmt_production
+  username: makerble_asmt
+  password: <%= ENV["MAKERBLE_ASMT_DATABASE_PASSWORD"] %>
