@@ -14,11 +14,21 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="bg-gray-100">
+    <nav class="bg-slate-800 text-white p-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <a href="/dashboard" class="text-2xl font-bold">
+          Patiently
+        </a>
+        <% if session[:user_id] %>
+          <%= button_to 'Logout', auth_logout_path, method: :delete, class: 'bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' %>
+        <% end %>
+      </div>
+    </nav>
+    <main class="container mx-auto">
       <%= yield %>
     </main>
   </body>
