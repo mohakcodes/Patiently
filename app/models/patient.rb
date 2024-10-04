@@ -4,4 +4,8 @@ class Patient < ApplicationRecord
   validates :gender, inclusion: { in: ['Male', 'Female', 'Other'] }, presence: true
   validates :contact_info, presence: true
   validates :medical_history, presence: true
+
+  scope :registrations_per_day, -> {
+    group_by_day(:created_at).count
+  }
 end

@@ -56,4 +56,12 @@
       <% end %>
     </ul>
   </div>
+
+  <% if @current_user.role == 'doctor' %>
+    <div class="mt-8">
+        <h2 class="text-2xl font-bold mb-4">Patient Graph over Days</h2>
+        <%= line_chart @patients_per_day, height: "300px", library: { title: { text: 'Patient Registrations Per Day', x: -20 } } %>
+    </div>
+  <% end %>
+
 </div>
