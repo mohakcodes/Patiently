@@ -1,0 +1,14 @@
+<h1>Login</h1>
+<%= form_with(model: User.new, url: auth_login_path, method: :post, local: true) do |form| %>
+  <div>
+    <label>Email:</label>
+    <%= form.email_field :email %>
+  </div>
+  <div>
+    <label>Password:</label>
+    <%= form.password_field :password %>
+  </div>
+  <%= form.submit "Login" %>
+<% end %>
+
+<p>Don't have an account? <%= link_to 'Sign up here', auth_signup_path %></p>

@@ -1,0 +1,22 @@
+<h1>Sign Up</h1>
+<%= form_with(model: User.new, url: auth_signup_path, method: :post, local: true) do |form| %>
+  <div>
+    <label>Name:</label>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <label>Email:</label>
+    <%= form.email_field :email %>
+  </div>
+  <div>
+    <label>Password:</label>
+    <%= form.password_field :password %>
+  </div>
+  <div>
+    <label>Role:</label>
+    <%= form.select :role, options_for_select([['Receptionist', 'receptionist'], ['Doctor', 'doctor']]) %>
+  </div>
+  <%= form.submit "Sign Up" %>
+<% end %>
+
+<p>Already have an account? <%= link_to 'Login here', auth_login_path %></p>
