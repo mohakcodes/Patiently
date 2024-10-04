@@ -1,14 +1,23 @@
-<h1>Login</h1>
-<%= form_with(model: User.new, url: auth_login_path, method: :post, local: true) do |form| %>
-  <div>
-    <label>Email:</label>
-    <%= form.email_field :email %>
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
+    <h1 class="text-3xl font-bold text-center mb-6">Login</h1>
+    
+    <%= form_with(model: User.new, url: auth_login_path, method: :post, local: true, class: "space-y-6") do |form| %>
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Email:</label>
+        <%= form.email_field :email, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none" %>
+      </div>
+      
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Password:</label>
+        <%= form.password_field :password, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none" %>
+      </div>
+      
+      <%= form.submit "Login", class: "w-full bg-blue-600 text-black font-bold py-2 px-4 rounded-md hover:bg-blue-700" %>
+    <% end %>
+    
+    <p class="text-center text-gray-600 mt-4">
+      Don't have an account? <%= link_to 'Sign up here', auth_signup_path, class: "text-blue-500 hover:underline" %>
+    </p>
   </div>
-  <div>
-    <label>Password:</label>
-    <%= form.password_field :password %>
-  </div>
-  <%= form.submit "Login" %>
-<% end %>
-
-<p>Don't have an account? <%= link_to 'Sign up here', auth_signup_path %></p>
+</div>

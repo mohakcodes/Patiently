@@ -1,1 +1,59 @@
-<h1>Home Page</h1>
+<div class="min-h-screen bg-gray-100 p-6">
+  <h2 class="text-2xl font-semibold mb-4 text-center">Welcome, <%= @current_user.role == 'doctor' ? 'Doctor' : 'Receptionist' %>!</h2>
+
+  <% if @current_user.role == 'receptionist' %>
+    <div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+      <h2 class="text-2xl font-semibold mb-4 text-center">Add New Patient</h2>
+      <%= form_with model: @patient, url: dashboard_patients_path, local: true, class: "space-y-4" do |form| %>
+        <div>
+          <%= form.label :name, class: "block text-gray-700 font-medium mb-2" %>
+          <%= form.text_field :name, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none" %>
+        </div>
+        
+        <div>
+          <%= form.label :age, class: "block text-gray-700 font-medium mb-2" %>
+          <%= form.number_field :age, min: 0, max: 150, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none" %>
+        </div>
+        
+        <div>
+          <%= form.label :gender, class: "block text-gray-700 font-medium mb-2" %>
+          <%= form.select :gender, ['Male', 'Female', 'Other'], {}, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none" %>
+        </div>
+        
+        <div>
+          <%= form.label :contact_info, class: "block text-gray-700 font-medium mb-2" %>
+          <%= form.text_field :contact_info, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none" %>
+        </div>
+        
+        <div>
+          <%= form.label :medical_history, class: "block text-gray-700 font-medium mb-2" %>
+          <%= form.text_area :medical_history, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none", rows: 3 %>
+        </div>
+        
+        <%= form.submit 'Add Patient', class: "w-full bg-blue-600 text-white font-bold py-2 rounded-md hover:bg-blue-700" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="mt-8">
+    <h2 class="text-2xl font-semibold mb-4">Patient List</h2>
+    <ul class="space-y-4">
+      <% @patients.each do |patient| %>
+        <li class="p-4 bg-white rounded-lg shadow">
+          <strong class="text-lg"><%= patient.name %></strong> (Age: <%= patient.age %>, Gender: <%= patient.gender %>)
+          <br>
+          <strong>Contact:</strong> <%= patient.contact_info %>
+          <br>
+          <strong>Medical History:</strong> <%= patient.medical_history %>
+          
+          <% if @current_user.role == 'receptionist' %>
+            <div class="mt-2">
+              <%= link_to 'Edit', edit_dashboard_patient_path(patient), class: "text-blue-600 hover:underline" %> |
+              <%= link_to 'Delete', dashboard_patient_path(patient), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-600 hover:underline" %>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
