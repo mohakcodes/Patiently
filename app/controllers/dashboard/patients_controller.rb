@@ -25,7 +25,7 @@ class Dashboard::PatientsController < ApplicationController
     end
   
     def destroy
-      @patient.destroy
+      @patient.soft_delete
       redirect_to dashboard_path, notice: 'Patient deleted successfully.'
     end
   
