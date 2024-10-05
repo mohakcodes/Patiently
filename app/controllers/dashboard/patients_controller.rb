@@ -17,12 +17,15 @@ class Dashboard::PatientsController < ApplicationController
     end
   
     def update
-      if @patient.update(patient_params)
+      if patient_params.values.any?(&:blank?)
+        redirect_to dashboard_path, alert: 'Please fill in all fields.'
+      elsif @patient.update(patient_params)
         redirect_to dashboard_path, notice: 'Patient updated successfully.'
       else
         render 'dashboard/index'
       end
     end
+    
   
     def destroy
       @patient.soft_delete
