@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root to: "intro#index"
 
+  get 'intro/index', to: 'intro#index', as: 'intro_index'
+
   get "auth/login", to: "auth#login"
   get "auth/signup", to: "auth#signup"
   post "auth/login", to: "auth#create_session"
