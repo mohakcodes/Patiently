@@ -4,5 +4,5 @@ class User < ApplicationRecord
     validates :name, presence: true
     validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
     validates :password, presence: true, length: { minimum: 6 }
-    validates :role, presence: true, inclusion: { in: ['receptionist', 'doctor'] }
+    validates :role, presence: true, inclusion: { in: [ "receptionist", "doctor" ] }
 end
